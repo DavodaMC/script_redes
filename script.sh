@@ -11,6 +11,93 @@
 #
 
 #
+# FUNCIONES PARA MENSAJES REPETIDOS, PARA NO TENER QUE PONER ESOS MENSAJES 100 VECES (EXAGERACIÓN), CREAMOS UNA FUNCIÓN DEL MENSAJE Y LA VAMOS LLAMANDO. MÁS OPTIMIZADO TANTO PARA NOSOTROS EL TIEMPO COMO EL CÓDIGO EN SÍ
+#
+
+control_c_enter() {
+
+echo "#####################"
+echo "# CTRL + C + ENTER  #"
+echo "# PARA VOLVER ATRÁS #"
+echo "#####################"
+}
+
+enter() {
+
+echo "#####################"
+echo "#       ENTER       #"
+echo "# PARA VOLVER ATRÁS #"
+echo "#####################"
+}
+
+volver_atras() {
+
+clear
+echo "################################"
+echo ""
+echo "BOBO, ESTA OPCIÓN NO EXISTE:"
+echo "PRESIONA ENTER PARA VOLVER ANDA"
+echo ""
+echo "################################"
+read
+}
+
+submenu_mensaje() {
+echo "#                                                     #"
+echo "#######################################################"
+echo ""
+echo "1. Cambiar permisos a solo lectura."
+echo "2. Cambiar permisos a solo escritura."
+echo "3. Cambiar permisos a solo ejecución."
+echo ""
+echo "4. Cambiar permisos a lectura-escritura."
+echo "5. Cambiar permisos a lectura-ejecución."
+echo "6. Cambiar permisos a escritura-ejecución."
+echo ""
+echo "7. Cambiar permisos a lectura-escritura-ejecución."
+echo ""
+echo "8. Volver al submenú de permisos."
+echo "9. Salir del script."
+echo "#######################################################"
+}
+
+submenu_usuario_mensaje() {
+echo ""
+echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE USUARIO"
+echo ""
+read
+}
+submenu_grupo_mensaje() {
+echo ""
+echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
+echo ""
+read
+}
+
+submenu_historial_mensaje() {
+echo ""
+echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
+echo ""
+read
+}
+
+submenu_administracion_mensaje() {
+echo ""
+echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE ADMINISTRACIÓN"
+echo ""
+read
+}
+
+menu_principal_mensaje() {
+echo ""
+echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
+echo ""
+read
+}
+
+#
+
+#
 # SUBMENÚ PING
 #
 ping_menu() {
@@ -37,11 +124,8 @@ case $opping in
 clear
 echo "#####################"
 echo "#     PING NORMAL   #"
-echo "#####################"
 # LE PEDIMOS CTRL + C + ENTER PORQUE LOS PINGS EN LINUX SON RECURSIVOS, DE MANERA QUE CANCELAS EL COMANDO DE PING Y LUEGO SE EJECUTA EL READ HACIENDO ASÍ QUE PUEDAS LUEGO ENVIARLO AL MENÚ PRINCIPAL
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping normal:" ippingnormal
 # COMANDO PING NORMAL
 ping $ippingnormal
@@ -52,10 +136,7 @@ ping_menu
 clear
 echo "#####################"
 echo "#  PING SILENCIOSO  #"
-echo "#####################"
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping silencioso: " ippingsilencioso
 # OPCIÓN -q -> QUIET (SILENCIOSO)
 ping -q $ippingsilencioso
@@ -66,10 +147,7 @@ ping_menu
 clear
 echo "#####################"
 echo "#     PING FLOOD    #"
-echo "#####################"
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping flood: " ippingflood
 # OPCIÓN -f -> FLOOD (INUNDAR)
 ping -f $ippingflood
@@ -80,10 +158,7 @@ ping_menu
 clear
 echo "#####################"
 echo "#  PING MARCATIEMPO #"
-echo "#####################"
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping marcatiempo: " ippingmt
 # OPCIÓN -D -> TIMESTAMPS (MARCAS DE TIEMPO)
 ping -D $ippingmt
@@ -94,15 +169,13 @@ ping_menu
 clear
 echo "#####################"
 echo "#     PING BYTES    #"
-echo "#####################"
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping con cantidad de bytes: " ippingbytes
 # AQUÍ LE PEDIMOS TAMBIÉN LA CANTIDAD DE BYTES QUE QUIERE ENVIAR PORQUE NECESITAMOS 2 ARGUMENTOS (NO SOLO LA IP)
 read -p "Introduce la cantidad de bytes a enviar: " bytesping
+# OPCIÓN -s -> BYTES
 ping -s $bytesping $ippingbytes
-read# OPCIÓN -s -> BYTES
+read
 
 ping_menu
 ;;
@@ -110,10 +183,7 @@ ping_menu
 clear
 echo "#####################"
 echo "#   PING PAQUETES   #"
-echo "#####################"
-echo "#       ENTER       #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 read -p "Introduce la dirección IP para hacer el ping con cantidad de paquetes: " ippingpackets
 # AQUÍ LE PEDIMOS TAMBIÉN LA CANTIDAD DE PAQUETES QUE QUIERE ENVIAR PORQUE NECESITAMOS 2 ARGUMENTOS (NO SOLO LA IP)
 read -p "Introduce la cantidad de paquetes a enviar: " cantidadping
@@ -131,14 +201,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 ping_menu
 ;;
 esac
@@ -172,10 +235,7 @@ case $opifconfig in
 clear
 echo "#####################"
 echo "#      IFCONFIG     #"
-echo "#####################"
-echo "# CTRL + C + ENTER  #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+control_c_enter
 # COMANDO PARA MOSTRAR LA INTERFAZ DE RED
 ifconfig
 read
@@ -185,10 +245,7 @@ ifconfig_menu
 clear
 echo "#####################"
 echo "#     OBTENER IPs   #"
-echo "#####################"
-echo "#       ENTER       #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+enter
 # COMANDO PARA MOSTRAR LA INTERFAZ DE RED Y A TRAVÉS DE LA TUBERÍA (|) CONCATENAMOS 2 COMANDOS, DE FORMA QUE BUSCAMOS "INET" DENTRO DEL IFCONFIG
 ifconfig | grep inet
 read
@@ -198,10 +255,7 @@ ifconfig_menu
 clear
 echo "#####################"
 echo "#   OBTENER IPs BC  #"
-echo "#####################"
-echo "#       ENTER       #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+enter
 ifconfig | grep broadcast
 read
 ifconfig_menu
@@ -210,10 +264,7 @@ ifconfig_menu
 clear
 echo "#####################"
 echo "#  OBTENER NETMASK  #"
-echo "#####################"
-echo "#       ENTER       #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+enter
 ifconfig | grep netmask
 read
 ifconfig_menu
@@ -222,10 +273,7 @@ ifconfig_menu
 clear
 echo "#####################"
 echo "#  IFCONFIG -> TXT  #"
-echo "#####################"
-echo "#       ENTER       #"
-echo "# PARA VOLVER ATRÁS #"
-echo "#####################"
+enter
 echo ""
 echo "(Introduce: d -> para hacerlo en la carpeta del script)"
 read -p "Introduce la ruta donde quieres que se guarde: " rutaifconfigtxt
@@ -255,14 +303,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 ifconfig_menu
 ;;
 esac
@@ -314,14 +355,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 permisos_menu
 ;;
 esac
@@ -336,22 +370,7 @@ clear
 echo "#######################################################"
 echo "#                                                     #"
 echo "#      SUBMENÚ PERMISOS -> USUARIO PROPIETARIO        #"
-echo "#                                                     #"
-echo "#######################################################"
-echo ""
-echo "1. Cambiar permisos a solo lectura."
-echo "2. Cambiar permisos a solo escritura."
-echo "3. Cambiar permisos a solo ejecución."
-echo ""
-echo "4. Cambiar permisos a lectura-escritura."
-echo "5. Cambiar permisos a lectura-ejecución."
-echo "6. Cambiar permisos a escritura-ejecución."
-echo ""
-echo "7. Cambiar permisos a lectura-escritura-ejecución."
-echo ""
-echo "8. Volver al submenú de permisos."
-echo "9. Salir del script."
-echo "#######################################################"
+submenu_mensaje
 read -p "Introduce la opción que quieras seleccionar: " opsmuser
 case $opsmuser in
 1)
@@ -393,14 +412,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 menu_permisos_usuario
 ;;
 esac
@@ -415,22 +427,7 @@ clear
 echo "#######################################################"
 echo "#                                                     #"
 echo "#             SUBMENÚ PERMISOS -> GRUPO               #"
-echo "#                                                     #"
-echo "#######################################################"
-echo ""
-echo "1. Cambiar permisos a solo lectura."
-echo "2. Cambiar permisos a solo escritura."
-echo "3. Cambiar permisos a solo ejecución."
-echo ""
-echo "4. Cambiar permisos a lectura-escritura."
-echo "5. Cambiar permisos a lectura-ejecución."
-echo "6. Cambiar permisos a escritura-ejecución."
-echo ""
-echo "7. Cambiar permisos a lectura-escritura-ejecución."
-echo ""
-echo "8. Volver al submenú de permisos."
-echo "9. Salir del script."
-echo "#######################################################"
+submenu_mensaje
 read -p "Introduce la opción que quieras seleccionar: " opsmuser
 case $opsmuser in
 1)
@@ -470,14 +467,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 menu_permisos_grupo
 ;;
 esac
@@ -492,22 +482,7 @@ clear
 echo "#######################################################"
 echo "#                                                     #"
 echo "#              SUBMENÚ PERMISOS -> OTROS              #"
-echo "#                                                     #"
-echo "#######################################################"
-echo ""
-echo "1. Cambiar permisos a solo lectura."
-echo "2. Cambiar permisos a solo escritura."
-echo "3. Cambiar permisos a solo ejecución."
-echo ""
-echo "4. Cambiar permisos a lectura-escritura."
-echo "5. Cambiar permisos a lectura-ejecución."
-echo "6. Cambiar permisos a escritura-ejecución."
-echo ""
-echo "7. Cambiar permisos a lectura-escritura-ejecución."
-echo ""
-echo "8. Volver al submenú de permisos."
-echo "9. Salir del script."
-echo "#######################################################"
+submenu_mensaje
 read -p "Introduce la opción que quieras seleccionar: " opsmuser
 case $opsmuser in
 1)
@@ -547,14 +522,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 menu_permisos_otros
 ;;
 esac
@@ -588,10 +556,7 @@ clear
 read -p "Introduce el nombre del nuevo usuario: " nombreusuario
 # COMANDO PARA AÑADIR UN USUARIO
 sudo useradd $nombreusuario
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE USUARIO"
-echo ""
-read
+submenu_usuario_mensaje
 usuarios_menu
 ;;
 2)
@@ -600,10 +565,7 @@ read -p "Introduce el nombre del nuevo usuario con contraseña: " nombreusuario
 useradd $nombreusuario
 # COMANDO PARA ESTABLECER UNA CONTRASEÑA AL USUARIO
 passwd $nombreusuario
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE USUARIO"
-echo ""
-read
+submenu_usuario_mensaje
 usuarios_menu
 ;;
 3)
@@ -612,20 +574,14 @@ read -p "Introduce el nombre del nuevo usuario con fecha de expiración: " nombr
 read -p "Introduce la fecha de expiración del nuevo usuario en el formato YYYY-MM-DD: " fechaeusuario
 # OPCIÓN -e FUERZA AL USUARIO A PONER UNA FECHA DE EXPIRACIÓN DEL USUARIO
 sudo useradd -e $fechaeusuario $nombreusuario
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE USUARIO"
-echo ""
-read
+submenu_usuario_mensaje
 usuarios_menu
 ;;
 4)
 clear
 read -p "Introduce el nombre del usuario a borrar: " nombreusuarioborrar
 sudo userdel $nombreusuarioborrar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE USUARIO"
-echo ""
-read
+submenu_usuario_mensaje
 usuarios_menu
 ;;
 5)
@@ -636,14 +592,7 @@ clear
 exit
 ;;
 *)
-clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 ifconfig_menu
 ;;
 esac
@@ -677,10 +626,7 @@ case $opsmgrupo in
 1)
 clear
 cut -d: -f1 /etc/group
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 2)
@@ -689,10 +635,7 @@ read -p "Introduce el nombre del grupo del que quieras ver los miembros: " nombr
 echo "Miembros del grupo" $nombredelgrupo
 # COMANDO PARA OBTENER LOS USUARIOS DE UN GRUPO CONCATENADOS CON COMANDOS QUE MUESTRA LA INFORMACIÓN QUE DESEAMOS
 getent group $nombredelgrupo | cut -d: -f4 | tr ',' ' '
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 3)
@@ -700,10 +643,7 @@ clear
 read -p "Introduce el nombre del nuevo grupo: " nuevogrupo
 # COMANDO PARA AÑADIR UN NUEVO GRUPO
 sudo groupadd $nuevogrupo
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 4)
@@ -712,10 +652,7 @@ read -p "Introduce el nombre del usuario que quieras añadir: " nombreusuario
 read -p "Introduce el nombre del grupo al que quieras añadir el usuario: " nombregrupo
 # COMANDO PARA AÑADIR UN USUARIO A UN GRUPO
 sudo usermod -aG $nombregrupo $nombreusuario
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 5)
@@ -724,10 +661,7 @@ read -p "Introduce el nombre del usuario que quieres eliminar: " nombreusuariode
 read -p "Introduce el nombre del grupo del que quieres eliminaral usuario: " nombregrupodelete
 # COMANDO PARA ELIMINAR EL USUARIO DE UN GRUPO
 sudo gpasswd -d $nombreusuariodelete $nombregrupodelete
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 6)
@@ -735,10 +669,7 @@ clear
 read -p "Introduce el nombre del grupo que quieres eliminar: " nombredelgrupoeliminar
 # COMANDO PARA ELIMINAR UN GRUPO
 sudo groupdel $nombredelgrupoeliminar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE GRUPOS"
-echo ""
-read
+submenu_grupo_mensaje
 grupo_menu
 ;;
 7)
@@ -780,48 +711,33 @@ case $opsmhistorial in
 export HISTTIMEFORMAT=''
 clear
 history
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
-echo ""
-read
+submenu_historial_mensaje
 historial_menu
 ;;
 2)
 export HISTTIMEFORMAT='%F %T : '
 clear
 history
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
-echo ""
-read
+submenu_historial_mensaje
 historial_menu
 ;;
 3)
 clear
 read -p "Introduce lo que quieras buscar en el historial: " buscarhistorial
 history | grep $buscarhistorial
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
-echo ""
-read
+submenu_historial_mensaje
 historial_menu
 ;;
 4)
 clear
 history -n
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
-echo ""
-read
+submenu_historial_mensaje
 historial_menu
 ;;
 5)
 clear
 history -c
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE HISTORIAL"
-echo ""
-read
+submenu_historial_mensaje
 historial_menu
 ;;
 6)
@@ -862,10 +778,7 @@ case $opsmadministrar in
 clear
 # COMANDO PARA APAGAR EL ORDENADOR DE FORMA INSTANTÁNEA
 sudo shutdown -h now
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE ADMINISTRACIÓN"
-echo ""
-read
+submenu_administracion_mensaje
 administrarequipo_menu
 ;;
 2)
@@ -873,20 +786,14 @@ clear
 read -p "Introduce el tiempo en minutos para apagar el ordenador: " tiempoapagar
 # COMANDO PARA APAGAR EL ORDENADOR EN UN TIEMPO
 sudo shutdown -h +$tiempoapagar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE ADMINISTRACIÓN"
-echo ""
-read
+submenu_administracion_mensaje
 administrarequipo_menu
 ;;
 3)
 clear
 # COMANDO PARA REINICIAR EL ORDENADOR DE FORMA INSTANTÁNEA
 sudo shutdown -r now
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE ADMINISTRACIÓN"
-echo ""
-read
+submenu_administracion_mensaje
 administrarequipo_menu
 ;;
 4)
@@ -894,10 +801,7 @@ clear
 read -p "Introduce el tiempo en minutos para reiniciar el ordenador: " tiempoapagar
 # COMANDO PARA REINICIAR EL ORDENADOR EN UN TIEMPO
 sudo shutdown -r +$tiempoapagar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL SUBMENÚ DE ADMINISTRACIÓN"
-echo ""
-read
+submenu_administracion_mensaje
 administrarequipo_menu
 ;;
 5)
@@ -998,10 +902,7 @@ clear
 echo "Direcciones IP en uso en la red local:"
 # COMANDO PARA MOSTRAR LAS DIRECCIONES IP
 arp -an
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 9)
@@ -1010,9 +911,7 @@ echo "Tabla de enrutamiento:"
 # COMANDO PARA MOSTRAR LA TABLA DE ENRUTAMIENTO
 route -n
 # LE MOSTRAMOS UN MENSAJE PARA QUE PRESIONE UNA TECLA Y VUELVA HACIA ATRÁS, ASÍ NO SE SALE DEL MENÚ
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
+menu_principal_mensaje
 # CON EL READ PAUSAMOS Y AL PRESIONAR UNA TECLA, CONTINÚA PERO NO GUARDA NADA PORQUE NO HAY NINGUNA VARIABLE DETRÁS. POR ÚLTIMO, LE VOLVIMOS A ABRIR EL MENÚ PRINCIPAL
 read
 menu_principal
@@ -1028,10 +927,7 @@ read -p "Introduce la dirección de la puerta de enlace: " puerta_de_enlace
 sudo ifconfig $interfaz $direccion_ip netmask $mascara
 # COMANDO PARA CAMBIAR LA PUERTA DE ENLACE TENIENDO EL NOMBRE DE LA INTERFAZ DE RED (IMPORTANTE)
 sudo route add default gw $puerta_de_enlace $interfaz
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 11)
@@ -1040,10 +936,7 @@ clear
 read -p "Introduce la dirección IP a habilitar: " ip_a_habilitar
 # COMANDO DE IPTABLES PARA HABILITAR UNA DIRECCIÓN IP
 sudo iptables -I INPUT -s $ip_a_habilitar -j ACCEPT
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 12)
@@ -1052,10 +945,7 @@ clear
 read -p "Introduce la dirección IP a bloquear: " ip_a_bloquear
 # COMANDO DE IPTABLES PARA BLOQUEAR UNA DIRECCIÓN IP
 sudo iptables -A INPUT -s $ip_a_bloquear -j DROP
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 13)
@@ -1064,10 +954,7 @@ clear
 read -p "Introduce el puerto a abrir: " puertoabrir
 # COMANDO DE UNCOMPLICATED FIREWALL (UFW) PARA ABRIR UN PUERTO
 sudo ufw allow $puertoabrir
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 14)
@@ -1075,10 +962,7 @@ clear
 read -p "Introduce el puerto a cerrar: " puertocerrar
 # COMANDO DE UNCOMPLICATED FIREWALL (UFW) PARA CERRAR UN PUERTO
 sudo ufw deny $puertocerrar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 15)
@@ -1086,10 +970,7 @@ clear
 echo "Estado del UFW:"
 # COMANDO DE UNCOMPLICATED FIREWALL (UFW) PARA VER EL ESTADO DEL FIREWALL Y COMPROBAR PUERTOS, IPS...
 sudo ufw status
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 16)
@@ -1116,10 +997,7 @@ clear
 read -p "Introduce el nombre del paquete a instalar: " paqueteainstalar
 # COMANDO PARA INSTALAR UN PAQUETE
 apt-get install $paqueteainstalar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 18)
@@ -1127,48 +1005,33 @@ clear
 read -p "Introduce el nombre del paquete a actualizar: " paqueteaactualizar
 # COMANDO PARA ACTUALIZAR UN PAQUETE
 apt-get update $paqueteaactualizar
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 19)
 # COMANDO PARA ACTUALIZAR TODOS LOS PAQUETES
 sudo apt update&&upgrade
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 20)
 read -p "Introduce lo que quieras buscar en Google: " searchgoogle
 # BUSCAR EN GOOGLE LO QUE PONGAS
 xdg-open "https://www.google.com/search?q=$searchgoogle"
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 21)
 read -p "Introduce lo que quieras buscar en Youtube: " searchyt
 # BUSCAR EN YOUTUBE LO QUE PONGAS
 xdg-open "https://www.youtube.com/results?search_query=$searchyt"
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 22)
 # BUSCAR EN GOOGLE LA PÁGINA WEB DE LOS COMANDOS
 xdg-open "https://blog.desdelinux.net/mas-de-400-comandos-para-gnulinux-que-deberias-conocer/"
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 23)
@@ -1179,10 +1042,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR UNA TERMINAL
 gnome-terminal
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 24)
@@ -1193,10 +1053,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR EL GEDIT
 gedit
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 25)
@@ -1207,10 +1064,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR LA CALCULADORA
 gnome-calculator
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 26)
@@ -1221,10 +1075,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR EL EXPLORADOR DE ARCHIVOS
 nautilus
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 27)
@@ -1235,10 +1086,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR LA PAPELERA
 nautilus trash://
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 28)
@@ -1249,10 +1097,7 @@ echo ""
 sleep .5
 # COMANDO PARA ABRIR LAS DESCARGAS
 nautilus Descargas
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 29)
@@ -1261,10 +1106,7 @@ read -p "Introduce tu nombre de usuario: " usuario
 cd /home/$usuario
 # COMANDO PARA LISTAR LOS ARCHIVOS RECIENTES
 ls -lt | head
-echo ""
-echo "PRESIONA ENTER PARA VOLVER AL MENÚ PRINCIPAL"
-echo ""
-read
+menu_principal_mensaje
 menu_principal
 ;;
 30)
@@ -1273,13 +1115,7 @@ exit
 ;;
 *)
 clear
-echo "################################"
-echo ""
-echo "BOBO, ESTA OPCIÓN NO EXISTE:"
-echo "PRESIONA ENTER PARA VOLVER ANDA"
-echo ""
-echo "################################"
-read
+volver_atras
 menu_principal
 ;;
 # CIERRE DEL CASE (EN BASH SIEMPRE QUE SE ABRE SE TIENE QUE CERRAR) EJEMPLO -> IF -> FI
